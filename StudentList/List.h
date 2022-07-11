@@ -7,7 +7,7 @@ class Student
 
 public:
 	char name[10];
-	int Kor,Eng,Mat,Total;
+	int Kor, Eng, Mat, Total;
 	float ever;
 	Student* Next;
 };
@@ -16,13 +16,12 @@ class Node
 {
 private:
 	int _icount;
-	Student* _Head=NULL;
+	Student* _Head = NULL;
 	Student* _Tail = NULL;
 	Student* _Temp = NULL;
 
 public:
 	void NewStudent();
-	void Print();
 	void SInit();
 	void SInsert(Student* st);
 	//void FInsert(Student* st);
