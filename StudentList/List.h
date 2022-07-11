@@ -1,5 +1,7 @@
 #pragma once
 #define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+#include<string.h>
 class Student
 {
 
@@ -14,20 +16,20 @@ class Node
 {
 private:
 	int _icount;
-	Student* _Head;
-	Student* _Tail;
-	Student* _Temp;
+	Student* _Head=NULL;
+	Student* _Tail = NULL;
+	Student* _Temp = NULL;
 
 public:
-	Student NewStudent(Node* node);
-	void Print(Node* node);
-	Node SInit(Node* node);
-	void SInsert(Node* node);
-	void FInsert(Node* node);
-	void BInsert(Node* node);
-	void SPrint(Node* node);
-	void SAllPrint(Node* node);
-	void SDelete(Node* node);
-	void Schange(Node* node);
+	void NewStudent();
+	void Print();
+	void SInit();
+	void SInsert(Student* st);
+	//void FInsert(Student* st);
+	//void BInsert(Student* st);
+	void SPrint();
+	void SAllPrint();
+	void SDelete();
+	void SChange();
 
 };
