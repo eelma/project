@@ -5,10 +5,11 @@ int main(void)
 {
 	
 	Node* node=new Node;
-	node->SInit(node);
-	node->NewStudent(node);
-	node->NewStudent(node);
-	node->Print(node);
+	node->SInit();
+	
+	node->NewStudent();
+	node->SDelete();
+	node->Print();
 
 	return 0;
 
