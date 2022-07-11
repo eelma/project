@@ -3,13 +3,14 @@
 
 int main(void)
 {
-	
-	Node* node=new Node;
+
+	Node* node = new Node;
 	node->SInit();
-	
+
+	node->NewStudent();
 	node->NewStudent();
 	node->SDelete();
-	node->Print();
+	node->SAllPrint();
 
 	return 0;
 
