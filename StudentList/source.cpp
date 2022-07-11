@@ -4,93 +4,152 @@
 #include<string.h>
 using namespace std;
 
-Student Node::NewStudent(Node* node)
+void Node::NewStudent()
 {
 	char name[10];
 	int kor, eng, mat, total;
 	Student* temp = new Student;
 	Student* st = new Student;
 	memset(st, 0, sizeof(Student));
-	cout << "ÇÐ»ý ÀÌ¸§ ÀÔ·Â: "; cin >> name;
+	cout << "í•™ìƒ ì´ë¦„ ìž…ë ¥: "; cin >> name;
 	strcpy(st->name, name);
-	cout << "±¹¾î Á¡¼ö: "; cin >> kor;
+	cout << "êµ­ì–´ ì ìˆ˜: "; cin >> kor;
 	st->Kor = kor;
-	cout << "¿µ¾î Á¡¼ö: "; cin >> eng;
+	cout << "ì˜ì–´ ì ìˆ˜: "; cin >> eng;
 	st->Eng = eng;
-	cout << "¼öÇÐ Á¡¼ö: "; cin >> mat;
+	cout << "ìˆ˜í•™ ì ìˆ˜: "; cin >> mat;
 	st->Mat = mat;
 	total = kor + eng + mat;
 	st->Total = total;
 	st->ever = (float)total / 3;
-
-	if (node->_Head->Next == node->_Tail)
-	{
-		node->_Head->Next = st;
-		st->Next = node->_Tail;
-	}
-	else
-	{
-		_Temp = node->_Head->Next;
-		node->_Head->Next = st;
-		st->Next = _Temp;
-	}
-
-	return *st;
-	node->_icount++;
+	
+	_Temp->Next = st;
+	st->Next = _Tail;
+	_Temp = st;
+	_icount++;
 }
 
-Node Node::SInit(Node* node)
+void Node::SInit()
 {
-	node->_Head = new Student;
-	node->_Tail = new Student;
-	node->_Temp = new Student;
+	_Head = new Student;
+	_Tail = new Student;
 	
-	memset(node->_Head, 0, sizeof(Student));
-	memset(node->_Tail, 0, sizeof(Student));
-	memset(node->_Temp, 0, sizeof(Student));
+	memset(_Head, 0, sizeof(Student));
+	memset(_Tail, 0, sizeof(Student));
 
-	node->_Head->Next = node->_Tail;
-
-
+	_Head->Next = _Tail;
+	_Temp = _Head;
 	_icount = 0;
 
-	return *node;
 }
-void Node::SInsert(Node* node)
+void Node::SInsert(Student*st)
 {
-
-	if (node->_Head == NULL)
-		FInsert(node);
-	else
-		BInsert(node);
+	_Temp->Next = st;
+	st->Next = _Tail;
+	_Temp = st;
+	_icount++;
 }
-void Node::FInsert(Node* node)
+void Node::SPrint()
 {
+	char name[10];
+	cout << "ì´ë¦„ ìž…ë ¥: "; cin >> name;
+	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
+	{
 	
+		if (strcmp(name, _Head->Next->name) == 0)
+		{
+			cout << "ì´ë¦„: " << _Head->Next->name << endl;
+			cout << "êµ­ì–´ì ìˆ˜: " << _Head->Next->Kor << endl;
+			cout << "ì˜ì–´ì ìˆ˜: " << _Head->Next->Eng << endl;
+			cout << "ìˆ˜í•™ì ìˆ˜: " << _Head->Next->Mat << endl;
+			cout << "ì´ì  : " << _Head->Next->Total << endl;
+			cout << "í‰ê·  ì ìˆ˜: " << _Head->Next->ever << endl;
+			break;
+		}
+
+
+	}
+	if (strcmp(name, _Head->name) != 0 && _Head->Next == _Tail)
+		cout << "ìž˜ëª» ìž…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤." << endl;
+
 
 }
-void Node::BInsert(Node* node)
+void Node::SChange()
 {
+
+	char name[10];
+	int kor, eng, mat, total;
+
+	cout << "ì´ë¦„ ìž…ë ¥: "; cin >> name;
+	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
+	{
+
+		if (strcmp(name, _Head->Next->name) == 0)
+		{
+			cout << "ì´ë¦„: ";cin>>name;
+			strcpy(_Head->Next->name, name);
+			cout << "êµ­ì–´ì ìˆ˜: "; cin >> kor;
+			_Head->Next->Kor = kor;
+			cout << "ì˜ì–´ì ìˆ˜: "; cin >> eng;
+			_Head->Next->Eng = eng;
+			cout << "ìˆ˜í•™ì ìˆ˜: "; cin >> mat;
+			_Head->Next->Mat = mat;
+			total = kor + eng + mat;
+			_Head->Next->Total = total;
+			_Head->Next->ever = (float)total / 3;
+			
+			cout << "ë³€ê²½ ì™„ë£Œ"<<endl;
+			break;
+		}
+
+
+	}
+	if (strcmp(name, _Head->name) != 0 && _Head->Next == _Tail)
+		cout << "ìž˜ëª» ìž…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤." << endl;
 	
-
 }
-void Node::SPrint(Node*node)
-{
 
+void Node::Print()
+{
+	if (_Head->Next == NULL || _Head->Next == _Tail)
+	{
+		cout << "ëª©ë¡ì´ ì—†ìŠµë‹ˆë‹¤" << endl;
+		return;
 	
-
-
+	for(int i=0;i<_icount;i++,_Head=_Head->Next)
+	{
+	cout << "ì´ë¦„: " << _Head->Next->name<<endl;
+	cout << "êµ­ì–´ì ìˆ˜: "<<_Head->Next->Kor << endl;
+	cout << "ì˜ì–´ì ìˆ˜: " <<_Head->Next->Eng << endl;
+	cout << "ìˆ˜í•™ì ìˆ˜: " << _Head->Next->Mat << endl;
+	cout << "ì´ì  : " << _Head->Next->Total << endl;
+	cout << "í‰ê·  ì ìˆ˜: " << _Head->Next->ever << endl;
+	}
+	}
 }
-void Node::Print(Node * node)
+
+void Node::SDelete()
 {
-	for(int i=0;i<=_icount;i++)
 
-	cout << "ÀÌ¸§: " << node->_Head->Next->name<<endl;
-	cout << "±¹¾îÁ¡¼ö: "<<node->_Head->Next->Kor << endl;
-	cout << "¿µ¾îÁ¡¼ö: " << node->_Head->Next->Eng << endl;
-	cout << "¼öÇÐÁ¡¼ö: " << node->_Head->Next->Mat << endl;
-	cout << "ÃÑÁ¡ : " << node->_Head->Next->Total << endl;
-	cout << "Æò±Õ Á¡¼ö: " << node->_Head->Next->ever << endl;
+	char name[10];
+	Student* st;
+	cout << "ì´ë¦„ ìž…ë ¥: "; cin >> name;
+	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
+	{
+
+		if (strcmp(name, _Head->Next->name) == 0)
+		{
+			st = _Head->Next;
+			free(_Head->Next);
+			_Head->Next = st->Next;
+			cout << "ì‚­ì œ ì™„ë£Œ"<<endl;
+			break;
+		}
+
+
+	}
+	if (strcmp(name, _Head->name) != 0 && _Head->Next == _Tail)
+		cout << "ìž˜ëª» ìž…ë ¥í•˜ì…¨ìŠµë‹ˆë‹¤." << endl;
+
 
 }
-
