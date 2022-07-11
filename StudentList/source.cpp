@@ -22,7 +22,7 @@ void Node::NewStudent()
 	total = kor + eng + mat;
 	st->Total = total;
 	st->ever = (float)total / 3;
-	
+
 	_Temp->Next = st;
 	st->Next = _Tail;
 	_Temp = st;
@@ -33,7 +33,7 @@ void Node::SInit()
 {
 	_Head = new Student;
 	_Tail = new Student;
-	
+
 	memset(_Head, 0, sizeof(Student));
 	memset(_Tail, 0, sizeof(Student));
 
@@ -42,20 +42,56 @@ void Node::SInit()
 	_icount = 0;
 
 }
-void Node::SInsert(Student*st)
+void Node::SInsert(Student* st)
 {
 	_Temp->Next = st;
 	st->Next = _Tail;
 	_Temp = st;
 	_icount++;
 }
+
+void Node::SChange()
+{
+
+	char name[10];
+	int kor, eng, mat, total;
+
+	cout << "이름 입력: "; cin >> name;
+	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
+	{
+
+		if (strcmp(name, _Head->Next->name) == 0)
+		{
+			cout << "이름: "; cin >> name;
+			strcpy(_Head->Next->name, name);
+			cout << "국어점수: "; cin >> kor;
+			_Head->Next->Kor = kor;
+			cout << "영어점수: "; cin >> eng;
+			_Head->Next->Eng = eng;
+			cout << "수학점수: "; cin >> mat;
+			_Head->Next->Mat = mat;
+			total = kor + eng + mat;
+			_Head->Next->Total = total;
+			_Head->Next->ever = (float)total / 3;
+
+			cout << "변경 완료" << endl;
+			break;
+		}
+
+
+	}
+	if (strcmp(name, _Head->name) != 0 && _Head->Next == _Tail)
+		cout << "잘못 입력하셨습니다." << endl;
+
+}
+
 void Node::SPrint()
 {
 	char name[10];
 	cout << "이름 입력: "; cin >> name;
 	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
 	{
-	
+
 		if (strcmp(name, _Head->Next->name) == 0)
 		{
 			cout << "이름: " << _Head->Next->name << endl;
@@ -74,82 +110,51 @@ void Node::SPrint()
 
 
 }
-void Node::SChange()
+
+void Node::SAllPrint()
 {
-
-	char name[10];
-	int kor, eng, mat, total;
-
-	cout << "이름 입력: "; cin >> name;
-	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
+	Student* st = _Head->Next;
+	if (st == NULL || st == _Tail)
 	{
-
-		if (strcmp(name, _Head->Next->name) == 0)
-		{
-			cout << "이름: ";cin>>name;
-			strcpy(_Head->Next->name, name);
-			cout << "국어점수: "; cin >> kor;
-			_Head->Next->Kor = kor;
-			cout << "영어점수: "; cin >> eng;
-			_Head->Next->Eng = eng;
-			cout << "수학점수: "; cin >> mat;
-			_Head->Next->Mat = mat;
-			total = kor + eng + mat;
-			_Head->Next->Total = total;
-			_Head->Next->ever = (float)total / 3;
-			
-			cout << "변경 완료"<<endl;
-			break;
-		}
-
-
-	}
-	if (strcmp(name, _Head->name) != 0 && _Head->Next == _Tail)
-		cout << "잘못 입력하셨습니다." << endl;
-	
-}
-
-void Node::Print()
-{
-	if (_Head->Next == NULL || _Head->Next == _Tail)
-	{
-		cout << "목록이 없습니다" << endl;
+		cout << "저장된 데이터가 없습니다\n\n";
 		return;
-	
-	for(int i=0;i<_icount;i++,_Head=_Head->Next)
+	}
+	for (int i = 0; i < _icount; i++, st = st->Next)
 	{
-	cout << "이름: " << _Head->Next->name<<endl;
-	cout << "국어점수: "<<_Head->Next->Kor << endl;
-	cout << "영어점수: " <<_Head->Next->Eng << endl;
-	cout << "수학점수: " << _Head->Next->Mat << endl;
-	cout << "총점 : " << _Head->Next->Total << endl;
-	cout << "평균 점수: " << _Head->Next->ever << endl;
+		cout << "이름: " << st->name << endl;
+		cout << "국어점수: " << st->Kor << endl;
+		cout << "영어점수: " << st->Eng << endl;
+		cout << "수학점수: " << st->Mat << endl;
+		cout << "총점 : " << st->Total << endl;
+		cout << "평균 점수: " << st->ever << endl;
 	}
-	}
+
 }
 
 void Node::SDelete()
 {
 
 	char name[10];
-	Student* st;
+	Student* st=_Head;
+	Student* tm;
 	cout << "이름 입력: "; cin >> name;
-	for (int i = 0; i < _icount; i++, _Head = _Head->Next)
+
+	while (st->Next!=NULL)
 	{
 
-		if (strcmp(name, _Head->Next->name) == 0)
-		{
-			st = _Head->Next;
-			free(_Head->Next);
-			_Head->Next = st->Next;
-			cout << "삭제 완료"<<endl;
+		if (strcmp(st->Next->name, name) == 0)
 			break;
-		}
-
+		st = st->Next;
 
 	}
-	if (strcmp(name, _Head->name) != 0 && _Head->Next == _Tail)
-		cout << "잘못 입력하셨습니다." << endl;
-
-
+	if (st->Next == NULL && strcmp(st->name, name) != 0)
+	{
+		cout << "찾으시는 대상이 없습니다\n\n";
+		return;
+	}
+	tm = st->Next->Next;
+	free(st->Next);
+	st->Next = tm;
+	_icount--;
+	cout << "삭제완료" << endl;
 }
