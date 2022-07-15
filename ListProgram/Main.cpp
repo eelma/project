@@ -4,7 +4,7 @@
 #include<cstring>
 
 int main(void)
-{/*
+{
 	Student* st = new Student;
 
 	int choice;
@@ -13,7 +13,8 @@ int main(void)
 
 	do    
 	{
-		cout << endl << "[1. 학생 추가]    [2. 추가할 학생 위치]    [3. 목록 출력]    [4. 정보 수정]    [5. 검색]    [6. 총 학생수]    [7. 삭제]    [00. 종료]"<<endl;
+		cout << endl << "[1. 학생 추가]    [2. 추가할 학생 위치]    [3. 목록 출력]    [4. 정보 수정]    [5. 검색]" << endl;
+		cout<<"[6. 총 학생수]    [7. 삭제]    [8. 세이브]   [9.리셋]    [00. 종료]" << endl;
 		cout<<"선택하세요"<<endl;
 		cin >> choice;
 		
@@ -49,6 +50,13 @@ int main(void)
 		case 7:
 			node->SDelete();
 			break;
+		case 8:
+			node->SaveData();
+			break;
+
+		case 9:
+			node->ReSet();
+			break;
 
 		case 00:
 
@@ -59,19 +67,8 @@ int main(void)
 			cout << "잘못 입력하셨습니다" << endl;
 		}
 
-	} while (1);*/
+	} while (1);
 	
-	Node* node = new Node;
-	node->SInit();
-	/*node->NewStudent();
-	node->NewStudent();
-	node->NewStudent();
-	node->SaveData();*/
-	node->ReadData();
-	node->SAllPrint();
-	node->ReSet();
-	node->SAllPrint();
-
 	return 0;
 
 }

@@ -41,7 +41,7 @@ public:
 	void SAllPrint();
 	void SDelete();
 	void SChange();
-	void ReadData();
+//	void ReadData();
 	void ReSet();
 
 	Student* Search(Node*node);

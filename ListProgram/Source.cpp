@@ -44,7 +44,8 @@ void Node::SaveData()
 	fp << fixed;
 	fp.precision(2);
 
-	fp.open("data.txt", ios::app);
+
+	fp.open("data.txt", ios::out);
 	
 	if (!fp) { cout << "실패" << endl; return; }
 
@@ -63,7 +64,7 @@ void Node::SaveData()
 
 }
 
-
+/*
 void Node::ReadData()
 {
 	fstream fp;
@@ -106,10 +107,8 @@ void Node::ReadData()
 	}
 
 	fp.close();
+}*/
 
-	
-
-}
 void Node::ReSet()
 {
 
@@ -128,7 +127,10 @@ void Node::ReSet()
 		Next->Prev = Prev;
 		st = _Head;
 	}
+	_icount = 0;
+	fstream fp;
 
+	int nResult = remove("data.txt");
 }
 
 void Node::FNewStudent(Student* st2)
@@ -180,10 +182,49 @@ void Node::SInit()
 	_Tail->Prev = _Head;
 	
 	_Temp = _Head;
-
-
-
 	_icount = 0;
+
+	fstream fp;
+	fp.open("data.txt");
+	if (!fp) { cout << "실패" << endl; return; }
+
+	for (; !fp.eof();) {
+		
+		cout << fixed;
+		cout.precision(2);
+		char a[10];
+		int b;
+		float f;
+		Student* st = new Student;
+		memset(st, 0, sizeof(Student));
+
+		fp >> a;
+		strcpy(st->name, a);
+
+		fp >> b;
+		if (b <= 0)
+		{
+			delete st;
+			return;
+		}
+		st->Kor = b;
+
+		fp >> b;
+		st->Eng = b;
+
+		fp >> b;
+		st->Mat = b;
+
+		fp >> b;
+		st->Total = b;
+
+		fp >> f;
+		st->ever = f;
+		b = f = 0;
+		BInsert(st);
+	}
+
+	fp.close();
 
 }
 
@@ -342,6 +383,7 @@ void Node::SDelete()
 	char name[10];
 	Student* st = _Head->Next;
 	Student* tm;
+	Student* bm;
 	cout << "이름 입력: "; cin >> name;
 
 	while (st!= NULL)
@@ -359,13 +401,15 @@ void Node::SDelete()
 	}
 
 	tm = st->Next;//headnextnext
+	bm = st->Prev;
 	free(st);
 
-	_Head->Next = tm;
-	tm->Prev = _Head;
+	bm->Next = tm;
+	tm->Prev = bm;
 
 	_icount--;
 	cout << "삭제완료" << endl;
+	//SInit();
 }
 void Node::TotalStudent()
 {
