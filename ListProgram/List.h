@@ -31,7 +31,9 @@ private:
 public:
 	void SaveData();
 	void TotalStudent();
+
 	void NewStudent();
+
 	void SInit();
 	void SInsert(Student* st);
 	void FInsert(Student* st);

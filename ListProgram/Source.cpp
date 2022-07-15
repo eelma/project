@@ -186,7 +186,7 @@ void Node::SInit()
 
 	fstream fp;
 	fp.open("data.txt");
-	if (!fp) { cout << "½ÇÆÐ" << endl; return; }
+	if (!fp) {  return; }
 
 	for (; !fp.eof();) {
 		
