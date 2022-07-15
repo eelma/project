@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{c077bf1f-8d0d-4a2a-b6d3-434c2b208a42}</ProjectGuid>
-    <RootNamespace>CLang0</RootNamespace>
+    <ProjectGuid>{dc055dc6-6932-4029-9321-2e9a1bc452bf}</ProjectGuid>
+    <RootNamespace>stackque</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -72,8 +72,6 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>../output/debug</OutDir>
-    <IntDir>../output/debug</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -141,7 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="C_Lang_0.cpp" />
+    <ClCompile Include="Que.cpp" />
+    <ClCompile Include="QueList.cpp" />
+    <ClCompile Include="Stack.cpp" />
+    <ClCompile Include="StackLinked.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
