@@ -29,7 +29,7 @@ private:
 	Student* _Temp = NULL;
 
 public:
-	void createData();
+	void SaveData();
 	void TotalStudent();
 	void NewStudent();
 	void SInit();
@@ -42,6 +42,7 @@ public:
 	void SDelete();
 	void SChange();
 	void ReadData();
+	void ReSet();
 
 	Student* Search(Node*node);
 	~Node();

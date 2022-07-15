@@ -2,10 +2,13 @@
 #include"List.h"
 #include<iostream>
 #include<string.h>
+#include<fstream>
 using namespace std;
 
 void Node::NewStudent()
 {
+	
+
 	char name[10];
 	int kor, eng, mat, total;
 	Student* temp = new Student;
@@ -27,35 +30,112 @@ void Node::NewStudent()
 }
 
 
-void Node::createData()
+void Node::SaveData()
 {
 	char name[10];
 	int kor, eng, mat, total;
 	float ever;
+
+	Student* st = _Head->Next;
+	
 	
 
-	FILE* fp = 0;
-	fopen_s(&fp, "data.txt", "w");
-	if (fp == NULL) return;
+	fstream fp;
+	fp << fixed;
+	fp.precision(2);
 
-	cout << "학생 이름 입력: "; cin >> name;
-	cout << "국어 점수: "; cin >> kor;
-	cout << "영어 점수: "; cin >> eng;
-	cout << "수학 점수: "; cin >> mat;
-	total = kor + eng + mat;
-	ever = (float)total / 3;
+	fp.open("data.txt", ios::app);
+	
+	if (!fp) { cout << "실패" << endl; return; }
 
-	fprintf(fp, "%s%d%d%d%d%f\n", name, kor, eng, mat, total,ever);
-		
-	_icount++;
-
-
-	fclose(fp);
+	for (; st != _Tail;st=st->Next)
+	{
+	fp << st->name << endl;
+	fp << st->Kor << endl;
+	fp << st->Eng << endl;
+	fp << st->Mat << endl;
+	fp << st->Total << endl;
+	fp << st->ever << endl;
+	}
+	
+	fp.close();
 
 
 }
+
+
+void Node::ReadData()
+{
+	fstream fp;
+	fp.open("data.txt");
+	if (!fp) { cout << "실패" << endl; return; }
+		while (!fp.eof()) {
+		Student* st = new Student;
+
+		cout << fixed;
+		cout.precision(2);
+		char a[10];
+		int b;
+		float f;
+
+		fp >> a;
+		strcpy(st->name, a);
+		cout <<"이름: " << a ;
+		
+		fp >> b; 
+		st->Kor = b;
+		cout << "국어: " << b;
+
+		fp >> b;
+		st->Eng = b;
+		cout << "영어: " << b;
+
+		fp >> b;
+		st->Mat = b;
+		cout << "수학: " << b;
+
+		fp >> b;
+		st->Total = b;
+		cout << left << "총점: " << b;
+
+		fp >> f;
+		st->ever = f;
+		cout << "평균: " << f<<endl;
+
+		BInsert(st);
+	}
+
+	fp.close();
+
+	
+
+}
+void Node::ReSet()
+{
+
+	Student* st = _Head->Next;
+	if (st == _Tail)
+	{
+		cout << "삭제 완료\n";
+		return;
+	}
+	for (int i = 0; i < _icount; i++, st = st->Next)
+	{
+		Student* Prev = st->Prev;
+		Student* Next = st->Next;
+		delete st;
+		Prev->Next = Next;
+		Next->Prev = Prev;
+		st = _Head;
+	}
+
+}
+
 void Node::FNewStudent(Student* st2)
 {
+	cout << fixed;
+	cout.precision(2);
+
 	if (st2 == NULL)
 	{
 		return;
@@ -98,43 +178,15 @@ void Node::SInit()
 
 	_Head->Next = _Tail;
 	_Tail->Prev = _Head;
-
 	
 	_Temp = _Head;
+
+
 
 	_icount = 0;
 
 }
-void Node::ReadData()
-{
-	
-		FILE* fp = 0;
-		fopen_s(&fp, "data.txt", "r");
 
-		if (fp == NULL) { return; }
-
-		
-			
-		
-		char strBuffer[256];// = { 0, };
-		memset(strBuffer, 0, sizeof(char) * 256);
-
-			Student* st = new Student;
-			memset(st, 0, sizeof(Student));
-
-			// 메모리로 부터 입출력
-			fgets(strBuffer, 256, fp);
-
-			sscanf_s(strBuffer, "%s%d%d%d%d%f", st->name,_countof(st->name), &st->Kor, &st->Eng, &st->Mat,&st->Total,&st->ever);
-		
-			fclose(fp);
-		
-			BInsert(st);
-
-		printf("%s, %d, %d, %d", st->name, st->Kor, st->Eng, st->Mat);
-		
-
-}
 
 void Node::BInsert(Student* st)
 {

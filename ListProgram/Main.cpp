@@ -60,9 +60,16 @@ int main(void)
 		}
 
 	} while (1);*/
+	
 	Node* node = new Node;
 	node->SInit();
+	/*node->NewStudent();
+	node->NewStudent();
+	node->NewStudent();
+	node->SaveData();*/
 	node->ReadData();
+	node->SAllPrint();
+	node->ReSet();
 	node->SAllPrint();
 
 	return 0;
