@@ -1,64 +1,72 @@
-#define _CRT_SECURE_NO_WARNINGS
 #include"List.h"
-#include<iostream>
-#include<cstring>
 
 int main(void)
 {
 	Student* st = new Student;
 
 	int choice;
-	Node* node = new Node;
-	node->SInit();
+	LinkedList* list = new LinkedList;
+	list->SInit();
 
 	do    
 	{
-		cout << endl << "[1. 학생 추가]    [2. 추가할 학생 위치]    [3. 목록 출력]    [4. 정보 수정]    [5. 검색]" << endl;
-		cout<<"[6. 총 학생수]    [7. 삭제]    [8. 세이브]   [9.리셋]    [00. 종료]" << endl;
+		cout << endl << "[0. 로드]    [1. 학생 추가]    [2. 추가할 학생 위치]    [3. 목록 출력]    [4. 정보 수정]    " << endl;
+		cout<<"[5. 검색]    [6. 총 학생수]    [7. 삭제]    [8. 세이브]   [9.리셋]    [999. 종료]" << endl;
 		cout<<"선택하세요"<<endl;
-		cin >> choice;
 		
-
+		cin >> choice;
+		if (cin.fail() == true)
+		{
+			cout << "잘못 입력하셨습니다" << endl;
+			break;
+		}
+		
 		switch(choice)
 		{
+		case 0:
+			list->Load();
+			break;
 		case 1:
-			node->NewStudent();
+			list->NewStudent();
 			break;
 			
 		case 2:
 
-			st = node->Search(node);
-			node->FNewStudent(st);
+			st = list->Search(list);
+			list->FNewStudent(st);
 			break;
 
 		case 3:
-			node->SAllPrint();
+			list->SAllPrint();
 			break;
 
 		case 4:
-			node->SChange();
+			list->SChange();
 			break;
 
 		case 5:
-			node->SPrint();
+			list->SPrint();
 			break;
 
 		case 6:
-			node->TotalStudent();
+			list->TotalStudent();
 			break;
 
 		case 7:
-			node->SDelete();
+			list->SDelete();
 			break;
 		case 8:
-			node->SaveData();
+			list->SaveData();
 			break;
 
 		case 9:
-			node->ReSet();
+			list->ReSet();
+			break;
+		case 10:
+			list->AllDelete();
 			break;
 
-		case 00:
+		case 999:
 
 			cout << "프로그램을 종료합니다" << endl;
 			return 0;
@@ -73,14 +81,3 @@ int main(void)
 
 }
 
-
-//
-//node->NewStudent();
-//
-//
-//
-//
-//st = node->Search(node);
-//node->FNewStudent(st);
-//
-//
