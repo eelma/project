@@ -39,11 +39,11 @@ int main(void)
 			break;
 
 		case 4:
-		//	list->SChange();
+			noob->SChange(list);
 			break;
 
 		case 5:
-		//	list->SPrint();
+			noob->SPrint(list);
 			break;
 
 		case 6:
@@ -51,7 +51,7 @@ int main(void)
 			break;
 
 		case 7:
-			//list->SDelete();
+			noob->SDelete(list);
 			break;
 		case 8:
 			noob->SaveData(list);

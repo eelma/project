@@ -50,6 +50,12 @@ public:
 	template<class T>
 	void FNewStudent(LinkedList<T> st2);
 
+	template<class T>
+	void SPrint(LinkedList<T> list);
+
+	template<class T>
+	void SDelete(LinkedList<T> list);
+
 
 };
 
@@ -343,38 +349,155 @@ void Student::FNewStudent(LinkedList<T> st2)
 
 
 template<class T>
-void LinkedList::SChange(LinkedList<T> list)
+void Student::SChange(LinkedList<T> list)
+{
+	char name[10];
+	cout << "찾으시는 이름 : "; cin >> name;
+
+	Node<T>* tmp = list._Temp->_Next;
+	Student* st = tmp->TData;
+	if (st == nullptr)
+	{
+		cout << "데이터가 존재하지 않습니다.";
+		return;
+	}
+
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	{
+		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
+		{
+			cout << "잘못 입력하셨습니다." << endl;
+			break;
+		}
+		if (strcmp(name, st->name) == 0)
+		{
+			Student* ch = tmp->TData;
+
+			cout << fixed;
+			cout.precision(2);
+
+			char name[10];
+			int kor, eng, mat, total;
+			
+			memset(ch, 0, sizeof(Student));
+
+
+			cout << "학생 이름 입력: "; cin >> name;
+			ch->name= new char[strlen(name)];
+			strcpy(ch->name, name);
+			cout << "국어 점수: "; cin >> kor;
+			ch->Kor = kor;
+			cout << "영어 점수: "; cin >> eng;
+			ch->Eng = eng;
+			cout << "수학 점수: "; cin >> mat;
+			ch->Mat = mat;
+			total = kor + eng + mat;
+			ch->Total = total;
+			ch->ever = (float)total / 3;
+			list._icount++;
+
+			return;
+
+		}
+	}
+
+}
+
+
+
+template<class T>
+void Student::SPrint(LinkedList<T> list)
+{
+	char name[10];
+	cout << "찾으시는 이름 : "; cin >> name;
+
+	Node<T>* tmp = list._Temp->_Next;
+	Student* st = tmp->TData;
+	if (st == nullptr)
+	{
+		cout << "데이터가 존재하지 않습니다.";
+		return;
+	}
+
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	{
+		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
+		{
+			cout << "잘못 입력하셨습니다." << endl;
+			break;
+		}
+		if (strcmp(name, st->name) == 0)
+		{
+			Student* ch = tmp->TData;
+
+			cout << fixed;
+			cout.precision(2);
+			cout << "이름: " << ch->name << endl;
+			cout << "국어점수: " << ch->Kor << endl;
+			cout << "영어점수: " << ch->Eng << endl;
+			cout << "수학점수: " << ch->Mat << endl;
+			cout << "총점 : " << ch->Total << endl;
+			cout << "평균 점수: " << ch->ever << endl;
+			
+
+			return;
+
+		}
+	}
+
+
+}
+
+
+
+
+
+template<class T>
+void Student::SDelete(LinkedList<T> list)
 {
 
 	char name[10];
-	int kor, eng, mat, total;
-	Student* temp = _Head;
-	cout << "이름 입력: "; cin >> name;
+	cout << "찾으시는 이름 : "; cin >> name;
 
-	for (; temp->Next != _Tail; temp = temp->Next)
+	Node<T>* tmp = list._Temp->_Next;
+	Student* st = tmp->TData;
+	if (st == nullptr)
 	{
+		cout << "데이터가 존재하지 않습니다.";
+		return;
+	}
 
-		if (strcmp(name, temp->Next->name) == 0)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	{
+		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
 		{
-			cout << "이름: "; cin >> name;
-			strcpy(temp->Next->name, name);
-			cout << "국어점수: "; cin >> kor;
-			temp->Next->Kor = kor;
-			cout << "영어점수: "; cin >> eng;
-			temp->Next->Eng = eng;
-			cout << "수학점수: "; cin >> mat;
-			temp->Next->Mat = mat;
-			total = kor + eng + mat;
-			temp->Next->Total = total;
-			temp->Next->ever = (float)total / 3;
-
-			cout << "변경 완료" << endl;
+			cout << "잘못 입력하셨습니다." << endl;
 			break;
 		}
+		if (strcmp(name, st->name) == 0)
+		{
+			Node<T>* Prev = tmp->_Prev;
+			Node<T>* Next = tmp->_Next;
 
+			delete tmp;
 
+			Prev->_Next = Next;
+			Next->_Prev = Prev;
+
+			list._icount--;
+
+			return;
+
+		}
 	}
-	if (strcmp(name, temp->name) != 0 && temp->Next == _Tail)
-		cout << "잘못 입력하셨습니다." << endl;
-
 }
+
+
+//void LinkedList::ReSet()
+//{
+//
+//	AllDelete();
+//
+//	int nResult = remove("data.txt");
+//}
+//

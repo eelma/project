@@ -49,8 +49,6 @@ public:
 	void AllDelete();
 
 	//public:
-	//	void SPrint();
-	//	void SDelete();
 	//	void ReSet();
 };
 template<class T>
@@ -144,94 +142,4 @@ void LinkedList<T>::AllDelete()
 		return;
 	}*/
 }
-//
-//
-//
-//
-//
-//
 
-//
-//void LinkedList::TotalStudent()
-//{
-//	system("cls");
-//	cout << "총 " << _icount << "명" << endl;
-//
-//}
-//
-//
-//
-//void LinkedList::SPrint()
-//{
-//	cout << fixed;
-//	cout.precision(2);
-//	char name[10];
-//	cout << "이름 입력: "; cin >> name;
-//	Student* temp = _Head;
-//	for (; temp->Next != _Tail; temp = temp->Next)
-//	{
-//
-//		if (strcmp(name, temp->Next->name) == 0)
-//		{
-//			cout << "이름: " << temp->Next->name << endl;
-//			cout << "국어점수: " << temp->Next->Kor << endl;
-//			cout << "영어점수: " << temp->Next->Eng << endl;
-//			cout << "수학점수: " << temp->Next->Mat << endl;
-//			cout << "총점 : " << temp->Next->Total << endl;
-//			cout << "평균 점수: " << temp->Next->ever << endl;
-//			break;
-//		}
-//
-//
-//	}
-//	if (strcmp(name, temp->name) != 0 && temp->Next == _Tail)
-//		cout << "잘못 입력하셨습니다." << endl;
-//
-//
-//}
-//
-//
-//void LinkedList::SDelete()
-//{
-//
-//	char name[10];
-//	Student* st = _Head->Next;
-//	Student* tm;
-//	Student* bm;
-//	cout << "이름 입력: "; cin >> name;
-//
-//	while (st != NULL)
-//	{
-//
-//		if (strcmp(st->name, name) == 0)
-//			break;
-//		st = st->Next;
-//
-//	}
-//	if (st == NULL)
-//	{
-//		cout << "찾으시는 대상이 없습니다\n\n";
-//		return;
-//	}
-//
-//	tm = st->Next;
-//	bm = st->Prev;
-//	free(st);
-//
-//	bm->Next = tm;
-//	tm->Prev = bm;
-//
-//	_icount--;
-//	cout << "삭제완료" << endl;
-//	//SInit();
-//}
-//
-//
-//void LinkedList::ReSet()
-//{
-//
-//	AllDelete();
-//
-//	int nResult = remove("data.txt");
-//}
-//
