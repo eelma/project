@@ -51,7 +51,6 @@ public:
 	//public:
 	//	void SPrint();
 	//	void SDelete();
-	//	void SChange();
 	//	void ReSet();
 };
 template<class T>
@@ -227,41 +226,6 @@ void LinkedList<T>::AllDelete()
 //	//SInit();
 //}
 //
-//void LinkedList::SChange()
-//{
-//
-//	char name[10];
-//	int kor, eng, mat, total;
-//	Student* temp = _Head;
-//	cout << "이름 입력: "; cin >> name;
-//
-//	for (; temp->Next != _Tail; temp = temp->Next)
-//	{
-//
-//		if (strcmp(name, temp->Next->name) == 0)
-//		{
-//			cout << "이름: "; cin >> name;
-//			strcpy(temp->Next->name, name);
-//			cout << "국어점수: "; cin >> kor;
-//			temp->Next->Kor = kor;
-//			cout << "영어점수: "; cin >> eng;
-//			temp->Next->Eng = eng;
-//			cout << "수학점수: "; cin >> mat;
-//			temp->Next->Mat = mat;
-//			total = kor + eng + mat;
-//			temp->Next->Total = total;
-//			temp->Next->ever = (float)total / 3;
-//
-//			cout << "변경 완료" << endl;
-//			break;
-//		}
-//
-//
-//	}
-//	if (strcmp(name, temp->name) != 0 && temp->Next == _Tail)
-//		cout << "잘못 입력하셨습니다." << endl;
-//
-//}
 //
 //void LinkedList::ReSet()
 //{
