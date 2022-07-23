@@ -1,4 +1,4 @@
-#pragma once
+#pragma#pragma once
 #include"List.h"
 
 class Student
@@ -22,7 +22,7 @@ public:
 	}
 	~Student()
 	{
-		delete []name;
+		delete[]name;
 	}
 
 public:
@@ -57,15 +57,14 @@ public:
 	void SDelete(LinkedList<T> list);
 
 
+	template<class T>
+	void sorting(LinkedList<T> list);
+
+	template<class T>
+	void ReSet(LinkedList<T> list);
+
+
 };
-
-
-
-
-
-
-
-
 
 
 
@@ -173,13 +172,13 @@ void Student::SAllPrint(LinkedList<T> list)
 		{
 			return;
 		}
-
-		cout << "이름: " << st->name << endl;
-		cout << "국어점수: " << st->Kor << endl;
-		cout << "영어점수: " << st->Eng << endl;
-		cout << "수학점수: " << st->Mat << endl;
-		cout << "총점 : " << st->Total << endl;
-		cout << "평균 점수: " << st->ever << endl;
+		cout.setf(ios::left);
+		cout << "이름: "; cout.width(5); cout << st->name;
+		cout << "국어점수: "; cout.width(8); cout << st->Kor;
+		cout << "영어점수: "; cout.width(8); cout << st->Eng;
+		cout << "수학점수: "; cout.width(8); cout << st->Mat;
+		cout << "총점 : "; cout.width(8); cout << st->Total;
+		cout << "평균 점수: "; cout.width(8); cout << st->ever << endl;
 	}
 
 
@@ -243,7 +242,7 @@ void Student::Search(LinkedList<T> list)
 			list._icount++;
 
 			return;
-			
+
 		}
 	}
 
@@ -276,7 +275,7 @@ void Student::SaveData(LinkedList<T> list)
 
 	if (!fp) { cout << "실패" << endl; return; }
 
-	for (; tmp!=list._Tail; tmp=tmp->_Next,st=tmp->TData)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
 	{
 		fp << st->name << endl;
 		fp << st->Kor << endl;
@@ -315,7 +314,7 @@ void Student::FNewStudent(LinkedList<T> st2)
 	char name[10];
 	int kor, eng, mat, total;
 
-	
+
 	Student* st = new Student;
 
 	Node<T>* temp = st;
@@ -378,12 +377,12 @@ void Student::SChange(LinkedList<T> list)
 
 			char name[10];
 			int kor, eng, mat, total;
-			
+
 			memset(ch, 0, sizeof(Student));
 
 
 			cout << "학생 이름 입력: "; cin >> name;
-			ch->name= new char[strlen(name)];
+			ch->name = new char[strlen(name)];
 			strcpy(ch->name, name);
 			cout << "국어 점수: "; cin >> kor;
 			ch->Kor = kor;
@@ -394,7 +393,7 @@ void Student::SChange(LinkedList<T> list)
 			total = kor + eng + mat;
 			ch->Total = total;
 			ch->ever = (float)total / 3;
-			list._icount++;
+
 
 			return;
 
@@ -438,7 +437,7 @@ void Student::SPrint(LinkedList<T> list)
 			cout << "수학점수: " << ch->Mat << endl;
 			cout << "총점 : " << ch->Total << endl;
 			cout << "평균 점수: " << ch->ever << endl;
-			
+
 
 			return;
 
@@ -447,8 +446,6 @@ void Student::SPrint(LinkedList<T> list)
 
 
 }
-
-
 
 
 
@@ -490,6 +487,59 @@ void Student::SDelete(LinkedList<T> list)
 
 		}
 	}
+}
+
+
+
+
+template<class T>
+void Student::sorting(LinkedList<T> list)
+{
+	Node<T>* mid = list._Head->_Next;
+	Student* data1 = mid->TData;
+	Student* data2 = mid->_Next->TData;
+	if (mid == list._Tail)
+		return;
+
+	for (int i = 0; i < list._icount; i++)
+	{
+		mid = list._Head->_Next;
+		data1 = mid->TData;
+		data2 = mid->_Next->TData;
+		for (; mid->_Next->_Next != NULL; data1 = mid->TData, data2 = mid->_Next->TData)
+		{
+			if (data1->Total > data2->Total)
+			{
+				Node<T>* Next = mid->_Next;
+				Node<T>* Prev = mid->_Prev;
+
+				mid->_Next = Next->_Next;
+				Next->_Next->_Prev = mid;
+				Next->_Prev = Prev;
+				Prev->_Next = Next;
+
+				Next->_Next = mid;
+				mid->_Prev = Next;
+
+			}
+			else
+			{
+				mid = mid->_Next;
+			}
+		}
+	}
+
+}
+
+
+
+template<class T>
+void Student::ReSet(LinkedList<T> list)
+{
+	list.AllDelete();
+	remove("data.txt");
+
+
 }
 
 

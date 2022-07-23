@@ -17,47 +17,44 @@ public:
 	Node* _Prev;
 
 	Node()
-	{ 
-		_Next = _Prev = nullptr; 
+	{
+		_Next = _Prev = nullptr;
 	};
-	~Node(){}
+	~Node() {}
 };
 
 
 template<class T>
 class LinkedList
 {
-	public:
-	
+public:
+
 	Node<T>* _Head = NULL;
 	Node<T>* _Tail = NULL;
 	Node<T>* _Temp = NULL;
-	
+
 public:
 	static int _icount;
 
 public:
 	LinkedList();
-//	~LinkedList();
+	~LinkedList();
 
 
 public:
 	void SInit();
-	//void SInsert(Student* st);
 	void FInsert(T node);
 	void BInsert(T node);
 	void AllDelete();
 
-	//public:
-	//	void ReSet();
 };
 template<class T>
-int LinkedList<T>::_icount=0;
+int LinkedList<T>::_icount = 0;
 
 template<class T>
 LinkedList<T>::LinkedList()
 {
-	
+
 	_Head = new Node<T>;
 	_Tail = new Node<T>;
 
@@ -67,13 +64,13 @@ LinkedList<T>::LinkedList()
 	_Temp = _Head;
 	_icount = 0;
 }
-//
-//template<class T>
-//LinkedList<T>::~LinkedList()
-//{
-//	//delete _Head;
-//	//delete _Tail;
-//}
+
+template<class T>
+LinkedList<T>::~LinkedList()
+{
+	//delete _Head;
+	//delete _Tail;
+}
 
 template<class T>
 void LinkedList<T>::SInit()
@@ -94,13 +91,13 @@ void LinkedList<T>::FInsert(T data)
 	newnode->TData = data;
 
 	Node<T>* Next = _Head->_Next;
-	
+
 	_Head->_Next = newnode;
 	newnode->_Prev = _Head;
 
 	newnode->_Next = Next;
 	Next->_Prev = newnode;
-	
+
 
 	_icount++;
 }
@@ -111,7 +108,7 @@ void LinkedList<T>::BInsert(T data)
 	Node<T>* Prev = _Tail->_Prev;
 	newnode->TData = data;
 
-	_Tail->_Prev=newnode;
+	_Tail->_Prev = newnode;
 	newnode->_Next = _Tail;
 	_Tail->_Prev = newnode;
 
