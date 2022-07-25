@@ -12,7 +12,7 @@ template<class T>
 class Node
 {
 public:
-	T TData;
+	T Data;
 	Node* _Next;
 	Node* _Prev;
 
@@ -88,7 +88,7 @@ template<class T>
 void LinkedList<T>::FInsert(T data)
 {
 	Node<T>* newnode = new Node<T>();
-	newnode->TData = data;
+	newnode->Data = data;
 
 	Node<T>* Next = _Head->_Next;
 
@@ -106,7 +106,7 @@ void LinkedList<T>::BInsert(T data)
 {
 	Node<T>* newnode = new Node<T>();
 	Node<T>* Prev = _Tail->_Prev;
-	newnode->TData = data;
+	newnode->Data = data;
 
 	_Tail->_Prev = newnode;
 	newnode->_Next = _Tail;

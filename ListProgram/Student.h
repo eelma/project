@@ -1,4 +1,4 @@
-#pragma#pragma once
+#pragma once
 #include"List.h"
 
 class Student
@@ -158,7 +158,7 @@ void Student::SAllPrint(LinkedList<T> list)
 	system("cls");
 
 	Node<T>* tmp = list._Temp->_Next;
-	Student* st = tmp->TData;
+	Student* st = tmp->Data;
 
 	if (tmp == list._Tail)
 	{
@@ -166,7 +166,7 @@ void Student::SAllPrint(LinkedList<T> list)
 		return;
 	}
 
-	for (; tmp->_Next != nullptr; tmp = tmp->_Next, st = tmp->TData)
+	for (; tmp->_Next != nullptr; tmp = tmp->_Next, st = tmp->Data)
 	{
 		if (tmp == NULL)
 		{
@@ -194,14 +194,14 @@ void Student::Search(LinkedList<T> list)
 	cout << "찾으시는 이름 : "; cin >> name;
 
 	Node<T>* tmp = list._Temp->_Next;
-	Student* st = tmp->TData;
+	Student* st = tmp->Data;
 	if (st == nullptr)
 	{
 		cout << "데이터가 존재하지 않습니다.";
 		return;
 	}
 
-	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->Data)
 	{
 		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
 		{
@@ -216,14 +216,14 @@ void Student::Search(LinkedList<T> list)
 			newnode->_Prev = tmp;
 			newnode->_Next = Next;
 			Next->_Prev = newnode;
-			newnode->TData = new Student;
+			newnode->Data = new Student;
 
 			cout << fixed;
 			cout.precision(2);
 
 			char name[10];
 			int kor, eng, mat, total;
-			Student* st2 = newnode->TData;
+			Student* st2 = newnode->Data;
 			memset(st2, 0, sizeof(Student));
 
 
@@ -264,7 +264,7 @@ void Student::SaveData(LinkedList<T> list)
 	float ever;
 
 	Node<T>* tmp = list._Temp->_Next;
-	Student* st = tmp->TData;
+	Student* st = tmp->Data;
 
 	fstream fp;
 	fp << fixed;
@@ -275,7 +275,7 @@ void Student::SaveData(LinkedList<T> list)
 
 	if (!fp) { cout << "실패" << endl; return; }
 
-	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->Data)
 	{
 		fp << st->name << endl;
 		fp << st->Kor << endl;
@@ -284,10 +284,7 @@ void Student::SaveData(LinkedList<T> list)
 		fp << st->Total << endl;
 		fp << st->ever << endl;
 	}
-
 	fp.close();
-
-
 }
 
 
@@ -354,14 +351,14 @@ void Student::SChange(LinkedList<T> list)
 	cout << "찾으시는 이름 : "; cin >> name;
 
 	Node<T>* tmp = list._Temp->_Next;
-	Student* st = tmp->TData;
+	Student* st = tmp->Data;
 	if (st == nullptr)
 	{
 		cout << "데이터가 존재하지 않습니다.";
 		return;
 	}
 
-	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->Data)
 	{
 		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
 		{
@@ -370,7 +367,7 @@ void Student::SChange(LinkedList<T> list)
 		}
 		if (strcmp(name, st->name) == 0)
 		{
-			Student* ch = tmp->TData;
+			Student* ch = tmp->Data;
 
 			cout << fixed;
 			cout.precision(2);
@@ -411,14 +408,14 @@ void Student::SPrint(LinkedList<T> list)
 	cout << "찾으시는 이름 : "; cin >> name;
 
 	Node<T>* tmp = list._Temp->_Next;
-	Student* st = tmp->TData;
+	Student* st = tmp->Data;
 	if (st == nullptr)
 	{
 		cout << "데이터가 존재하지 않습니다.";
 		return;
 	}
 
-	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->Data)
 	{
 		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
 		{
@@ -427,7 +424,7 @@ void Student::SPrint(LinkedList<T> list)
 		}
 		if (strcmp(name, st->name) == 0)
 		{
-			Student* ch = tmp->TData;
+			Student* ch = tmp->Data;
 
 			cout << fixed;
 			cout.precision(2);
@@ -457,14 +454,14 @@ void Student::SDelete(LinkedList<T> list)
 	cout << "찾으시는 이름 : "; cin >> name;
 
 	Node<T>* tmp = list._Temp->_Next;
-	Student* st = tmp->TData;
+	Student* st = tmp->Data;
 	if (st == nullptr)
 	{
 		cout << "데이터가 존재하지 않습니다.";
 		return;
 	}
 
-	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->TData)
+	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->Data)
 	{
 		if (strcmp(name, st->name) != 0 && tmp->_Next == list._Tail)
 		{
@@ -490,23 +487,102 @@ void Student::SDelete(LinkedList<T> list)
 }
 
 
-
-
 template<class T>
 void Student::sorting(LinkedList<T> list)
 {
-	Node<T>* mid = list._Head->_Next;
-	Student* data1 = mid->TData;
-	Student* data2 = mid->_Next->TData;
+	int i = 0;
+	clock_t sTime, eTime;
+	sTime = clock();
+	
+	Node<T>* val = list._Head->_Next->_Next;
+	Student* data1 = val->Data;
+
+	Node<T>* Prev = val->_Prev;
+	Student* data2 = Prev->Data;
+
+	Node<T>* Next = val->_Next;
+
+	if(val==NULL)
+	{	
+		cout << "곤란" << endl;
+		return;
+	}
+
+	for(;val!=NULL&&data2!=NULL;)
+	{
+		if (data1->Total > data2->Total)
+			{
+				Prev = Prev->_Prev;
+				data2 = Prev->Data;
+			}
+			else
+			{
+				Node<T>* tmp = val->_Prev;
+				val->_Next = Prev;
+
+				val->_Prev = Prev->_Prev;
+				Prev->_Prev->_Next = val;
+
+				Prev->_Prev = val;
+		
+				tmp->_Next = Next;
+				Next->_Prev = tmp;
+
+				if (val->_Prev == list._Head)
+				{
+					val = Next;
+					data1 = val->Data;
+				}
+				Prev = val->_Prev;
+				data2 = Prev->Data;
+				Next = val->_Next;
+				
+				i++;
+			}
+		
+	}
+
+
+	cout << i<<endl;
+	eTime = clock() - sTime;
+	printf("\n\ttime => [%ld,%8.3f] => ", eTime, eTime / (double)CLK_TCK);
+
+}
+
+template<class T>
+void Student::ReSet(LinkedList<T> list)
+{
+	list.AllDelete();
+	remove("data.txt");
+
+
+}
+
+
+
+//void LinkedList::ReSet()
+//{
+//
+//	AllDelete();
+//
+//	int nResult = remove("data.txt");
+//}
+//
+
+
+/*Node<T>* mid = list._Head->_Next;
+	Student* data1 = mid->Data;
+	Student* data2 = mid->_Next->Data;
 	if (mid == list._Tail)
 		return;
-
+	clock_t sTime, eTime;
+	sTime = clock();
 	for (int i = 0; i < list._icount; i++)
 	{
 		mid = list._Head->_Next;
-		data1 = mid->TData;
-		data2 = mid->_Next->TData;
-		for (; mid->_Next->_Next != NULL; data1 = mid->TData, data2 = mid->_Next->TData)
+		data1 = mid->Data;
+		data2 = mid->_Next->Data;
+		for (; mid->_Next->_Next != NULL; data1 = mid->Data, data2 = mid->_Next->Data)
 		{
 			if (data1->Total > data2->Total)
 			{
@@ -528,26 +604,5 @@ void Student::sorting(LinkedList<T> list)
 			}
 		}
 	}
-
-}
-
-
-
-template<class T>
-void Student::ReSet(LinkedList<T> list)
-{
-	list.AllDelete();
-	remove("data.txt");
-
-
-}
-
-
-//void LinkedList::ReSet()
-//{
-//
-//	AllDelete();
-//
-//	int nResult = remove("data.txt");
-//}
-//
+	eTime = clock() - sTime;
+	printf("\n\ttime => [%ld,%8.3f] => ", eTime, eTime / (double)CLK_TCK);*/
