@@ -116,17 +116,25 @@ void LinkedList<T>::BInsert(T data)
 	Prev->_Next = newnode;
 
 	_icount++;
+	return;
 }
 template<class T>
 void LinkedList<T>::AllDelete()
 {
-
+	system("cls");
 	Node<T>* st = _Head->_Next;
-
+	if (st == NULL)
+	{
+		cout << "삭제실패" << endl;
+	}
 	for (; st != _Tail; st = st->_Next)
 	{
 		Node<T>* Prev = st->_Prev;
 		Node<T>* Next = st->_Next;
+		if (st->Data == NULL)
+		{
+			return;
+		}
 		delete st;
 		Prev->_Next = Next;
 		Next->_Prev = Prev;

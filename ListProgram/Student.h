@@ -6,11 +6,11 @@ class Student
 public:
 	char* name;
 	int Kor, Eng, Mat, Total;
-	float ever;
+	float aver;
 public:
 	Student()
 	{
-		Kor = Eng = Mat = Total = ever = 0;
+		Kor = Eng = Mat = Total = aver = 0;
 	}
 	Student(const char* myname, int kor, int eng, int mat) :Kor(kor), Eng(eng), Mat(mat)
 	{
@@ -18,7 +18,7 @@ public:
 		name = new char[len];
 		strcpy(name, myname);
 		Total = Kor + Eng + Mat;
-		ever = (float)Total / 3;
+		aver = (float)Total / 3;
 	}
 	~Student()
 	{
@@ -42,7 +42,7 @@ public:
 	void SAllPrint(LinkedList<T> list);
 
 	template<class T>
-	void Search(LinkedList<T> list);
+	void SearchInsert(LinkedList<T> list);
 
 	template<class T>
 	void TotalStudent(LinkedList<T> list);
@@ -70,6 +70,7 @@ public:
 
 Student* Student::NewStudent()
 {
+	system("cls");
 	char name[20];
 	int len;
 	int kor, eng, mat, total;
@@ -88,7 +89,7 @@ Student* Student::NewStudent()
 	st->Mat = mat;
 	total = kor + eng + mat;
 	st->Total = total;
-	st->ever = (float)total / 3;
+	st->aver = (float)total / 3;
 
 	return st;
 
@@ -99,9 +100,8 @@ Student* Student::NewStudent()
 template<class T>
 void Student::Load(LinkedList<T> list)
 {
+	system("cls");
 	list.AllDelete();
-
-
 	fstream fp;
 	fp.open("data.txt");
 	if (!fp) { cout << "로드 실패" << endl; return; }
@@ -140,7 +140,7 @@ void Student::Load(LinkedList<T> list)
 		st->Total = b;
 
 		fp >> f;
-		st->ever = f;
+		st->aver = f;
 		b = f = 0;
 		list.BInsert(st);
 	}
@@ -153,6 +153,7 @@ void Student::Load(LinkedList<T> list)
 template<class T>
 void Student::SAllPrint(LinkedList<T> list)
 {
+
 	cout << fixed;
 	cout.precision(2);
 	system("cls");
@@ -178,7 +179,7 @@ void Student::SAllPrint(LinkedList<T> list)
 		cout << "영어점수: "; cout.width(8); cout << st->Eng;
 		cout << "수학점수: "; cout.width(8); cout << st->Mat;
 		cout << "총점 : "; cout.width(8); cout << st->Total;
-		cout << "평균 점수: "; cout.width(8); cout << st->ever << endl;
+		cout << "평균 점수: "; cout.width(8); cout << st->aver << endl;
 	}
 
 
@@ -187,9 +188,9 @@ void Student::SAllPrint(LinkedList<T> list)
 
 
 template<class T>
-void Student::Search(LinkedList<T> list)
+void Student::SearchInsert(LinkedList<T> list)
 {
-
+	system("cls");
 	char name[10];
 	cout << "찾으시는 이름 : "; cin >> name;
 
@@ -238,7 +239,7 @@ void Student::Search(LinkedList<T> list)
 			st2->Mat = mat;
 			total = kor + eng + mat;
 			st2->Total = total;
-			st2->ever = (float)total / 3;
+			st2->aver = (float)total / 3;
 			list._icount++;
 
 			return;
@@ -259,9 +260,10 @@ void Student::Search(LinkedList<T> list)
 template<class T>
 void Student::SaveData(LinkedList<T> list)
 {
+	system("cls");
 	char name[10];
 	int kor, eng, mat, total;
-	float ever;
+	float aver;
 
 	Node<T>* tmp = list._Temp->_Next;
 	Student* st = tmp->Data;
@@ -277,14 +279,20 @@ void Student::SaveData(LinkedList<T> list)
 
 	for (; tmp != list._Tail; tmp = tmp->_Next, st = tmp->Data)
 	{
+		if (tmp == NULL)
+		{
+			cout << "종료" << endl;
+			return;
+		}
 		fp << st->name << endl;
 		fp << st->Kor << endl;
 		fp << st->Eng << endl;
 		fp << st->Mat << endl;
 		fp << st->Total << endl;
-		fp << st->ever << endl;
+		fp << st->aver << endl;
 	}
 	fp.close();
+	cout << "저장 성공" << endl;
 }
 
 
@@ -301,6 +309,7 @@ void Student::TotalStudent(LinkedList<T> list)
 template<class T>
 void Student::FNewStudent(LinkedList<T> st2)
 {
+	system("cls");
 	cout << fixed;
 	cout.precision(2);
 
@@ -328,7 +337,7 @@ void Student::FNewStudent(LinkedList<T> st2)
 	st->Mat = mat;
 	total = kor + eng + mat;
 	st->Total = total;
-	st->ever = (float)total / 3;
+	st->aver = (float)total / 3;
 
 	Node<T>* newdata = st2;
 	Node<T>* Prev = newdata->_Prev;
@@ -347,6 +356,7 @@ void Student::FNewStudent(LinkedList<T> st2)
 template<class T>
 void Student::SChange(LinkedList<T> list)
 {
+	system("cls");
 	char name[10];
 	cout << "찾으시는 이름 : "; cin >> name;
 
@@ -389,9 +399,9 @@ void Student::SChange(LinkedList<T> list)
 			ch->Mat = mat;
 			total = kor + eng + mat;
 			ch->Total = total;
-			ch->ever = (float)total / 3;
+			ch->aver = (float)total / 3;
 
-
+			cout << "변경완료" << endl;
 			return;
 
 		}
@@ -404,6 +414,7 @@ void Student::SChange(LinkedList<T> list)
 template<class T>
 void Student::SPrint(LinkedList<T> list)
 {
+	system("cls");
 	char name[10];
 	cout << "찾으시는 이름 : "; cin >> name;
 
@@ -433,7 +444,7 @@ void Student::SPrint(LinkedList<T> list)
 			cout << "영어점수: " << ch->Eng << endl;
 			cout << "수학점수: " << ch->Mat << endl;
 			cout << "총점 : " << ch->Total << endl;
-			cout << "평균 점수: " << ch->ever << endl;
+			cout << "평균 점수: " << ch->aver << endl;
 
 
 			return;
@@ -449,7 +460,7 @@ void Student::SPrint(LinkedList<T> list)
 template<class T>
 void Student::SDelete(LinkedList<T> list)
 {
-
+	system("cls");
 	char name[10];
 	cout << "찾으시는 이름 : "; cin >> name;
 
@@ -470,16 +481,17 @@ void Student::SDelete(LinkedList<T> list)
 		}
 		if (strcmp(name, st->name) == 0)
 		{
-			Node<T>* Prev = tmp->_Prev;
-			Node<T>* Next = tmp->_Next;
+		Node<T>* Prev = tmp->_Prev;
+		Node<T>* Next = tmp->_Next;
 
+			
 			delete tmp;
 
-			Prev->_Next = Next;
-			Next->_Prev = Prev;
+		Prev->_Next = Next;
+		Next->_Prev = Prev;
 
 			list._icount--;
-
+			cout << "삭제 완료" << endl;
 			return;
 
 		}
@@ -490,93 +502,13 @@ void Student::SDelete(LinkedList<T> list)
 template<class T>
 void Student::sorting(LinkedList<T> list)
 {
-	int i = 0;
-	clock_t sTime, eTime;
-	sTime = clock();
-	
-	Node<T>* val = list._Head->_Next->_Next;
-	Student* data1 = val->Data;
-
-	Node<T>* Prev = val->_Prev;
-	Student* data2 = Prev->Data;
-
-	Node<T>* Next = val->_Next;
-
-	if(val==NULL)
-	{	
-		cout << "곤란" << endl;
-		return;
-	}
-
-	for(;val!=NULL&&data2!=NULL;)
-	{
-		if (data1->Total > data2->Total)
-			{
-				Prev = Prev->_Prev;
-				data2 = Prev->Data;
-			}
-			else
-			{
-				Node<T>* tmp = val->_Prev;
-				val->_Next = Prev;
-
-				val->_Prev = Prev->_Prev;
-				Prev->_Prev->_Next = val;
-
-				Prev->_Prev = val;
-		
-				tmp->_Next = Next;
-				Next->_Prev = tmp;
-
-				if (val->_Prev == list._Head)
-				{
-					val = Next;
-					data1 = val->Data;
-				}
-				Prev = val->_Prev;
-				data2 = Prev->Data;
-				Next = val->_Next;
-				
-				i++;
-			}
-		
-	}
-
-
-	cout << i<<endl;
-	eTime = clock() - sTime;
-	printf("\n\ttime => [%ld,%8.3f] => ", eTime, eTime / (double)CLK_TCK);
-
-}
-
-template<class T>
-void Student::ReSet(LinkedList<T> list)
-{
-	list.AllDelete();
-	remove("data.txt");
-
-
-}
-
-
-
-//void LinkedList::ReSet()
-//{
-//
-//	AllDelete();
-//
-//	int nResult = remove("data.txt");
-//}
-//
-
-
-/*Node<T>* mid = list._Head->_Next;
+	system("cls");
+	Node<T>* mid = list._Head->_Next;
 	Student* data1 = mid->Data;
 	Student* data2 = mid->_Next->Data;
 	if (mid == list._Tail)
 		return;
-	clock_t sTime, eTime;
-	sTime = clock();
+
 	for (int i = 0; i < list._icount; i++)
 	{
 		mid = list._Head->_Next;
@@ -604,5 +536,16 @@ void Student::ReSet(LinkedList<T> list)
 			}
 		}
 	}
-	eTime = clock() - sTime;
-	printf("\n\ttime => [%ld,%8.3f] => ", eTime, eTime / (double)CLK_TCK);*/
+	
+
+}
+
+template<class T>
+void Student::ReSet(LinkedList<T> list)
+{
+	list.AllDelete();
+	remove("data.txt");
+
+
+}
+
