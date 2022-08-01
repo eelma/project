@@ -2,6 +2,7 @@
 #include<iostream>
 #include < stdlib.h >
 using namespace std;
+int _Count;
 class Node
 {
 public:
@@ -24,7 +25,12 @@ public:
 
 	}
 };
+void deque(Node*node)
+{
+	
 
+
+}
 
 void BinaryCreate(Node* node,int val)
 {
@@ -92,7 +98,8 @@ int main(void)
 	int arr[] = { 55,75,65,71,68,65,24,2,4};
 	Node* node = new Node;
 	node->Data = 55;
-	for (int i = 1; i < _countof(arr); i++)
+	_Count = _countof(arr);
+	for (int i = 1; i <_Count; i++)
 	{
 		BinaryCreate(node, arr[i]);
 	}
