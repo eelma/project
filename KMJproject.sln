@@ -21,6 +21,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QuickSort", "QuickSort\Quic
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vector_0", "Vector_0\Vector_0.vcxproj", "{D65F5183-12EE-4587-B408-7C98E5142668}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STL", "STL\STL.vcxproj", "{B9B3984B-E45F-4780-ABB3-510228868782}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -85,9 +87,20 @@ Global
 		{D65F5183-12EE-4587-B408-7C98E5142668}.Release|x64.Build.0 = Release|x64
 		{D65F5183-12EE-4587-B408-7C98E5142668}.Release|x86.ActiveCfg = Release|Win32
 		{D65F5183-12EE-4587-B408-7C98E5142668}.Release|x86.Build.0 = Release|Win32
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Debug|x64.ActiveCfg = Debug|x64
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Debug|x64.Build.0 = Debug|x64
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Debug|x86.ActiveCfg = Debug|Win32
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Debug|x86.Build.0 = Debug|Win32
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x64.ActiveCfg = Release|x64
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x64.Build.0 = Release|x64
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x86.ActiveCfg = Release|Win32
+		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B9B3984B-E45F-4780-ABB3-510228868782} = {49CF2B09-A85D-436E-BD7A-13EAB62710EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FAA9887-D512-43F0-9A4E-E5AA9CF942A6}
