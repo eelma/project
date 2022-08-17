@@ -23,6 +23,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Vector_0", "Vector_0\Vector
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "STL", "STL\STL.vcxproj", "{B9B3984B-E45F-4780-ABB3-510228868782}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "qotree", "qotree", "{D33C11A2-0C3F-49F0-B7A0-62DF3202A1B1}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Quardtree_0", "Quardtree_0\Quardtree_0.vcxproj", "{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -95,12 +99,21 @@ Global
 		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x64.Build.0 = Release|x64
 		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x86.ActiveCfg = Release|Win32
 		{B9B3984B-E45F-4780-ABB3-510228868782}.Release|x86.Build.0 = Release|Win32
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Debug|x64.ActiveCfg = Debug|x64
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Debug|x64.Build.0 = Debug|x64
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Debug|x86.ActiveCfg = Debug|Win32
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Debug|x86.Build.0 = Debug|Win32
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Release|x64.ActiveCfg = Release|x64
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Release|x64.Build.0 = Release|x64
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Release|x86.ActiveCfg = Release|Win32
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B9B3984B-E45F-4780-ABB3-510228868782} = {49CF2B09-A85D-436E-BD7A-13EAB62710EE}
+		{FFFDD125-CF3E-4DB2-A24A-9682BAEFF9F4} = {D33C11A2-0C3F-49F0-B7A0-62DF3202A1B1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3FAA9887-D512-43F0-9A4E-E5AA9CF942A6}
